@@ -1,7 +1,10 @@
 package lab5out;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,38 +24,36 @@ public class ContactPanel extends JPanel {
 		//InitialControl controller = new InitialControl(container);
 
 		// Create the information label.
-		JLabel label = new JLabel("Account Information", JLabel.CENTER);
-
-		contacts = new JTextArea(5, 20);
+		// Create a panel for the labels at the top of the GUI.    
+		JLabel contactLabel = new JLabel("Contacts", JLabel.CENTER);
+		JPanel center = new JPanel();
+		BoxLayout layout = new BoxLayout(center, BoxLayout.Y_AXIS);
+		center.setLayout(layout);
+		
+		contacts = new JTextArea(10, 30);
 		JScrollPane scrollPane = new JScrollPane(contacts); 
 		contacts.setEditable(false);
-		JPanel contactBuffer = new JPanel();
-		contactBuffer.add(scrollPane);
+		JPanel contactPanel = new JPanel();
+		contactPanel.add(scrollPane);
+		center.add(contactLabel, BorderLayout.CENTER);
+		center.add(contactPanel);
 		
-		// Create the login button.
+		
+		JPanel buttonPanel = new JPanel(new FlowLayout());
+		JPanel logOutPanel = new JPanel(new FlowLayout());
+		// Create the buttons.
 		JButton delete = new JButton("Delete");
-
-		JPanel deleteButtonBuffer = new JPanel();
-		deleteButtonBuffer.add(delete);
-
-		// Create the create account button.
 		JButton add = new JButton("Add");
-
-		JPanel addButtonBuffer = new JPanel();
-		addButtonBuffer.add(add);
-
-		// Create the create account button.
 		JButton logOut = new JButton("Log Out");
-
-		JPanel logOutButtonBuffer = new JPanel();
-		logOutButtonBuffer.add(logOut);
+		buttonPanel.add(delete);
+		buttonPanel.add(add);
+		logOutPanel.add(logOut);
+		center.add(buttonPanel);
+		center.add(logOutPanel);
 
 		// Arrange the components in a grid.
-		JPanel grid = new JPanel(new GridLayout(3, 1, 5, 5));
-		grid.add(label);
-		grid.add(deleteButtonBuffer);
-		grid.add(addButtonBuffer);
-		grid.add(logOutButtonBuffer);
+		JPanel grid = new JPanel(new GridLayout(4, 1, 0, 0));
+		grid.add(center);		
 		this.add(grid);
 
 	}

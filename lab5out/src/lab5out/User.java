@@ -12,4 +12,7 @@ public class User {
 	public void setUserId(String id) {
 		this.id = id;
 	}
+	public String getUserId() {
+		return id;
+	}
 }
