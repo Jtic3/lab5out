@@ -13,6 +13,7 @@ public class ChatServer extends AbstractServer
 	private JLabel status;
 	private boolean stopActionFlag;
 	private dBFile masterFile;
+	
 	public ChatServer(JTextArea log, JLabel status)
 	{
 		super(12345);
@@ -74,9 +75,8 @@ public class ChatServer extends AbstractServer
 			try {
 				loginErrorCode = masterFile.lookUp();
 				if(loginErrorCode.equals("LOGIN SUCCESS")) {
-					arg1.sendToClient(loginErrorCode);
-					User user = new User(masterFile.getId());
-					log.append(user.getUserId()+" "+"Has logged into the server!");
+					arg1.sendToClient(loginErrorCode);					
+					log.append(masterFile.getId()+" "+"Has logged into the server!");
 				}
 				else if(loginErrorCode.equals("LOGIN ERROR 1: USERNAME/PASSWORD")) {
 					arg1.sendToClient(loginErrorCode);
@@ -115,7 +115,7 @@ public class ChatServer extends AbstractServer
 				}
 				else {
 					try {											
-						arg1.sendToClient("CREATE ERROR 1: USERNAME SELECTED");
+						arg1.sendToClient(errorMessage);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

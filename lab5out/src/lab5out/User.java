@@ -3,9 +3,8 @@ package lab5out;
 public class User {
 	private String id;
 	
-	public User(String id){
+	public User(){
 		
-		setUserId(id);
 	}
 	
 	

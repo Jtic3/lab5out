@@ -31,6 +31,16 @@ public class LoginPanel extends JPanel
   {
     errorLabel.setText(error);
   }
+  // Setter for the error text.
+  public void setUserNameField(String error)
+  {
+	  usernameField.setText(error);
+  }
+//Setter for the error text.
+ public void setPassWordField(String error)
+ {
+	 passwordField.setText(error);
+ }
   
   // Constructor for the login panel.
   public LoginPanel(LoginControl lc)

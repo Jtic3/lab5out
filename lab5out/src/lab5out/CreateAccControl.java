@@ -48,11 +48,11 @@ public class CreateAccControl implements ActionListener {
 			System.out.println(data.getUsername()+" "+data.getPassword()+" "+ data.getVerifyPass());
 			if (data.getUsername().equals("") || data.getPassword().equals("")|| data.getVerifyPass().equals(""))
 			{
-				displayError("You must enter a username and two entities of your password.");
+				displayError("CREATE ERROR 3: NO INFORMATION ENTERED");
 				return;
 			}
 			else if(data.getPassword().length()<PASS_LENGTH) {
-				displayError("You must enter a password thats atleast 6 characters long.");
+				displayError("CREATE ERROR 4: PASSWORD LENGTH REQ NOT MET");
 				return;
 			}
 			// Submit the login information to the server.
@@ -67,10 +67,60 @@ public class CreateAccControl implements ActionListener {
 
 
 	}
+	// After the login is successful, set the User object and display the contacts screen. - this method would be invoked by 
+	//the ChatClient
+	public void createSuccess(String msg)
+	{
+
+		if(msg.equals("CREATE SUCCESS")) { 
+			CardLayout cardLayout = (CardLayout)container.getLayout();
+			LoginPanel loginPanel = (LoginPanel)container.getComponent(1);
+			loginPanel.setUserNameField("");
+			loginPanel.setPassWordField("");
+			loginPanel.setError("");
+			cardLayout.show(container, "2");			
+		}
+
+	}
 	// Method that displays a message in the error - could be invoked by ChatClient or by this class (see above)
 	public void displayError(String error)
 	{
-		CreateAccPanel createAccPanel = (CreateAccPanel)container.getComponent(2);
-		createAccPanel.setError(error);
+		if(error.equals("CREATE ERROR 1: USERNAME SELECTED")) {
+			CardLayout cardLayout = (CardLayout)container.getLayout();
+			CreateAccPanel createPanel = (CreateAccPanel)container.getComponent(2);
+			createPanel.setError("Username is already selected.");
+			createPanel.setUserNameField("");
+			createPanel.setPassWordField("");
+			createPanel.setVerifyPassWordField("");
+			cardLayout.show(container, "3");
+			System.out.println(error);
+		}
+		else if(error.equals("CREATE ERROR 2: PASSWORDS DON'T MATCH")) {
+			CardLayout cardLayout = (CardLayout)container.getLayout();
+			CreateAccPanel createPanel = (CreateAccPanel)container.getComponent(2);
+			createPanel.setError("Passwords do not match.");
+			createPanel.setUserNameField("");
+			createPanel.setPassWordField("");
+			createPanel.setVerifyPassWordField("");
+			cardLayout.show(container, "3");
+			System.out.println(error);
+		}
+		else if(error.equals("CREATE ERROR 3: NO INFORMATION ENTERED")) {
+			CreateAccPanel createPanel = (CreateAccPanel)container.getComponent(2);
+			createPanel.setError("You must enter a username and two entities of your password.");
+			createPanel.setUserNameField("");
+			createPanel.setPassWordField("");
+			createPanel.setVerifyPassWordField("");
+		}
+		else if(error.equals("CREATE ERROR 4: PASSWORD LENGTH REQ NOT MET")) {
+			CreateAccPanel createPanel = (CreateAccPanel)container.getComponent(2);
+			createPanel.setError("You must enter a password thats atleast 6 characters long.");
+			createPanel.setUserNameField("");
+			createPanel.setPassWordField("");
+			createPanel.setVerifyPassWordField("");
+		}
+		else {
+			
+		}
 	}
 }
