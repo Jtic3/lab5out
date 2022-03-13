@@ -45,11 +45,13 @@ public class dBFile {
 	}
 	
 	public void setMetaData() throws IOException {
-		File file = new File("src/"+FILE_NAME);
+		
+		File file = new File(FILE_NAME);
 		List<String> userData = new ArrayList<>();
 		// Creating an object of BufferedReader class
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
+		
 		while ((line = br.readLine()) != null) {
 			String token[] = line.split(",");
 			for(int i = 0; i < token.length; i++) {
@@ -63,7 +65,7 @@ public class dBFile {
 	
 	public String validate() throws IOException {
 		
-		String CreateErrorCode = "";
+		String CreateErrorCode = "";		
 		
 		for(String key : metaData.keySet()) {
 			List<String> valueSet = metaData.get(key);			
@@ -79,7 +81,7 @@ public class dBFile {
 	
 	public void writeMetaData() throws IOException {
 		try { 
-			fw = new FileWriter("src/"+FILE_NAME, true); 
+			fw = new FileWriter(FILE_NAME, true); 
 			fw.write(this.id+","+this.username+","+this.password+"\n"); 
 			System.out.println("Data Successfully appended into file"); 			
 		} finally 
@@ -90,13 +92,12 @@ public class dBFile {
 		}
 		}
 	}	
-	public String lookUp() throws IOException {
+	public String lookUp() throws IOException {	
 		
 		String loginErrorCode = "";
-
+		
 		for(String key : metaData.keySet()) {
 			List<String> valueSet = metaData.get(key);
-			System.out.println(valueSet.toString());
 			if(valueSet.contains(this.username) && valueSet.contains(this.password)) {
 				loginErrorCode = "LOGIN SUCCESS";
 				return loginErrorCode;

@@ -76,7 +76,7 @@ public class ChatServer extends AbstractServer
 				loginErrorCode = masterFile.lookUp();
 				if(loginErrorCode.equals("LOGIN SUCCESS")) {
 					arg1.sendToClient(loginErrorCode);					
-					log.append(masterFile.getId()+" "+"Has logged into the server!");
+					log.append(masterFile.getUsername()+" "+"Has logged into the server!");
 				}
 				else if(loginErrorCode.equals("LOGIN ERROR 1: USERNAME/PASSWORD")) {
 					arg1.sendToClient(loginErrorCode);

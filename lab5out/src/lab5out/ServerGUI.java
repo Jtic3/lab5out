@@ -135,7 +135,7 @@ public class ServerGUI extends JFrame
 	//Main take command line argument as parameter
 	public static void main(String[] args)
 	{
-		new ServerGUI(args[0]); //args[0] represents the title of the GUI
+		new ServerGUI("Server Window"); //args[0] represents the title of the GUI
 
 	}
 
