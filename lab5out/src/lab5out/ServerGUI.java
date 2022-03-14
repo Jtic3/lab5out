@@ -1,3 +1,7 @@
+//Joseph Ticer
+//Lab5out 
+//Dr. Smith
+//Software Engineering TR 2:40
 package lab5out;
 
 import java.awt.BorderLayout;

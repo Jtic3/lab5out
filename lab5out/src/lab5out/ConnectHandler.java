@@ -1,7 +1,7 @@
 
 //Name: Joseph Ticer
 //Class: Software Engineering 
-//Assignment: Lab3Out
+//Assignment: Lab5Out
 //Instructor: Dr. Smith 
 //Session: TR 2:40 - 4:15package lab1out;
 package lab5out;

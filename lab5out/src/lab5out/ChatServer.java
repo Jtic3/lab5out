@@ -1,3 +1,7 @@
+//Joseph Ticer
+//Lab5out 
+//Dr. Smith
+//Software Engineering TR 2:40
 package lab5out;
 
 import ocsf.server.AbstractServer;
@@ -6,14 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-
+//Extends AbstractServer class
 public class ChatServer extends AbstractServer
 {
 	private JTextArea log;
 	private JLabel status;
 	private boolean stopActionFlag;
+	//Declaring a masterFile variable from the dBFile class
 	private dBFile masterFile;
-	
+	//Constructor that takes a textarea and a label as the parameters
 	public ChatServer(JTextArea log, JLabel status)
 	{
 		super(12345);
@@ -27,12 +32,6 @@ public class ChatServer extends AbstractServer
 			e.printStackTrace();
 		}
 	}
-
-	public ChatServer(int port, int timeout)
-	{
-		super(port);
-	}
-
 	public void setLog(JTextArea log)
 	{
 		this.log = log;
@@ -58,21 +57,23 @@ public class ChatServer extends AbstractServer
 		this.stopActionFlag = stopActionFlag;
 	}
 
-
-
+	//Handles data sent from client and sends that data to the dBFile class
 	@Override
 	protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
 	{
 		// TODO Auto-generated method stub
 		String userId = arg0.toString();
+		//Conditional for login data
 		if (arg0 instanceof LoginData)
 		{
 			String loginErrorCode = "LOGIN SUCCESS";
+			//Retrieving login data from the login panel text fields and sending them to dBFile
 			LoginData loginData = (LoginData)arg0;	   
 			masterFile.setId(userId); 
 			masterFile.setUsername(loginData.getUsername()); 
 			masterFile.setPassword(loginData.getPassword());
 			try {
+				//Checks to see if the user name and password are correct
 				loginErrorCode = masterFile.lookUp();
 				if(loginErrorCode.equals("LOGIN SUCCESS")) {
 					arg1.sendToClient(loginErrorCode);					
@@ -86,10 +87,11 @@ public class ChatServer extends AbstractServer
 				e.printStackTrace();
 			}
 		}
+		//Conditional for create account data
 		else if (arg0 instanceof CreateAccData)
 		{
-			String errorMessage = "CREATE SUCCESS";
-			
+			String errorMessage = "CREATE SUCCESS";	
+			//Retrieving create account data from text fields and sending them to dBFile
 			CreateAccData createData = (CreateAccData)arg0;	   
 			if(createData.getPassword().equals(createData.getVerifyPass())){		
 					masterFile.setId(userId); 
@@ -148,7 +150,7 @@ public class ChatServer extends AbstractServer
     }*/
 
 	}
-
+	//When server is started it will send message to console and server log
 	protected void serverStarted() 
 	{
 		System.out.println("Server Started");
@@ -157,6 +159,7 @@ public class ChatServer extends AbstractServer
 		status.setForeground(Color.green);
 	}
 
+	//When server is stopped it will send message to console and server log
 	protected void serverStopped() 
 	{
 		System.out.println("Server Stopped");

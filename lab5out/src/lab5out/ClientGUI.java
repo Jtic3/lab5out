@@ -1,3 +1,7 @@
+//Joseph Ticer
+//Lab5out 
+//Dr. Smith
+//Software Engineering TR 2:40
 package lab5out;
 
 import javax.swing.*;
@@ -6,8 +10,6 @@ import java.io.IOException;
 
 public class ClientGUI extends JFrame
 {
- 
-  
   /**
 	 * 
 	 */
@@ -36,7 +38,7 @@ public class ClientGUI extends JFrame
     //Create the Controllers next
     //Next, create the Controllers
     InitialControl ic = new InitialControl(container); 
-    LoginControl lc = new LoginControl(container, client); //Probably will want to pass in ChatClient here
+    LoginControl lc = new LoginControl(container, client); 
     CreateAccControl cac = new CreateAccControl(container, client);
     
     
